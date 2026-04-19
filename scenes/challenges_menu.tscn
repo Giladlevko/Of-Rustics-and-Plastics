@@ -1,0 +1,644 @@
+[gd_scene load_steps=11 format=3 uid="uid://svvoxydi4txo"]
+
+[ext_resource type="Script" uid="uid://bfk6l7bonyvsj" path="res://scripts/challenges_menu.gd" id="1_tlt87"]
+[ext_resource type="Theme" uid="uid://dr70u7cgdil6v" path="res://themes/ui_theme.tres" id="2_tlt87"]
+[ext_resource type="Script" uid="uid://4ouakd7uu2mt" path="res://scripts/chall_button.gd" id="4_kir0a"]
+[ext_resource type="AudioStream" uid="uid://v0rrwlekwlmu" path="res://assets/music/sad_but_hopeful.ogg" id="5_bjpsp"]
+[ext_resource type="Texture2D" uid="uid://cnlxk087h660o" path="res://assets/ui/Sprite sheet for Basic Pack.png" id="5_munmm"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_munmm"]
+atlas = ExtResource("5_munmm")
+region = Rect2(709, 132, 22, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjpsp"]
+atlas = ExtResource("5_munmm")
+region = Rect2(741, 134, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sdipe"]
+atlas = ExtResource("5_munmm")
+region = Rect2(741, 134, 22, 22)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q38o2"]
+atlas = ExtResource("5_munmm")
+region = Rect2(709, 164, 22, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kir0a"]
+atlas = ExtResource("5_munmm")
+region = Rect2(258, 68, 12, 9)
+
+[node name="Challenges_menu" type="Control" node_paths=PackedStringArray("return_to_main", "chall_1", "chall_2", "chall_3", "chall_4", "plastic_bar", "animal_rect", "animal_label", "close_pics", "photo_zoom_cont", "dark_screen", "music_track")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tlt87")
+return_to_main = NodePath("buttonContainer/return_button")
+chall_1 = NodePath("MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_1/NinePatchRect/VBoxContainer/HBoxContainer2/chall_1")
+chall_2 = NodePath("MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_2/NinePatchRect/VBoxContainer/HBoxContainer2/chall_2")
+chall_3 = NodePath("MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_3/NinePatchRect/VBoxContainer/HBoxContainer2/chall_3")
+chall_4 = NodePath("MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_4/NinePatchRect/VBoxContainer/HBoxContainer2/chall_4")
+plastic_bar = NodePath("MarginContainer/NinePatchRect/title_container/micro_plastics_container/ProgressBar")
+animal_rect = NodePath("photo_zoom_cont/photo_rect/VBoxContainer/TextureRect")
+animal_label = NodePath("photo_zoom_cont/photo_rect/VBoxContainer/Label")
+close_pics = NodePath("photo_zoom_cont/photo_rect/buttonContainer/return_button")
+photo_zoom_cont = NodePath("photo_zoom_cont")
+dark_screen = NodePath("dark_screenContainer")
+music_track = NodePath("menu_theme")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("5_munmm")
+region_rect = Rect2(741, 38, 22, 22)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="title_container" type="VBoxContainer" parent="MarginContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="Control" type="Control" parent="MarginContainer/NinePatchRect/title_container"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/NinePatchRect/title_container"]
+layout_mode = 2
+theme = ExtResource("2_tlt87")
+theme_override_font_sizes/font_size = 48
+text = "Challenges!"
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/NinePatchRect/title_container"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 100
+
+[node name="micro_plastics_container" type="VBoxContainer" parent="MarginContainer/NinePatchRect/title_container"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 15
+
+[node name="micro_plastics_label" type="Label" parent="MarginContainer/NinePatchRect/title_container/micro_plastics_container"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_tlt87")
+theme_override_font_sizes/font_size = 24
+text = "Micro-Plastics In Body:"
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/NinePatchRect/title_container/micro_plastics_container"]
+custom_minimum_size = Vector2(350, 15)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_tlt87")
+max_value = 3000.0
+step = 1.0
+value = 2000.0
+show_percentage = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -450.0
+offset_top = -204.0
+offset_right = 450.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 50
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/h_separation = 5
+columns = 4
+
+[node name="challenge_1" type="MarginContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(222, 200)
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_1"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+texture = ExtResource("5_munmm")
+region_rect = Rect2(59, 107, 26, 26)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_1/NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.041
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.120001
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_1/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="chall_1" type="TextureButton" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_1/NinePatchRect/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_tlt87")
+disabled = true
+texture_normal = SubResource("AtlasTexture_munmm")
+texture_pressed = SubResource("AtlasTexture_bjpsp")
+texture_hover = SubResource("AtlasTexture_sdipe")
+texture_disabled = SubResource("AtlasTexture_q38o2")
+stretch_mode = 0
+script = ExtResource("4_kir0a")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_1/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="labelsContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_1/NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="requirements_label" type="Label" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_1/NinePatchRect/VBoxContainer/HBoxContainer/labelsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_tlt87")
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 0
+text = "Get a High 
+Score of 300:"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_1/NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 17
+
+[node name="Control" type="Control" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_1/NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="check_markContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_1/NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="completed_mark_3" type="TextureRect" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_1/NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer/check_markContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_kir0a")
+expand_mode = 3
+
+[node name="challenge_2" type="MarginContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(222, 200)
+layout_mode = 2
+theme = ExtResource("2_tlt87")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_2"]
+custom_minimum_size = Vector2(250, 250)
+layout_mode = 2
+texture = ExtResource("5_munmm")
+region_rect = Rect2(59, 107, 26, 26)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_2/NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.041
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.120001
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_2/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="chall_2" type="TextureButton" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_2/NinePatchRect/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_tlt87")
+disabled = true
+texture_normal = SubResource("AtlasTexture_munmm")
+texture_pressed = SubResource("AtlasTexture_bjpsp")
+texture_hover = SubResource("AtlasTexture_sdipe")
+texture_disabled = SubResource("AtlasTexture_q38o2")
+stretch_mode = 0
+script = ExtResource("4_kir0a")
+chall_amount = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_2/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="labelsContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_2/NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="requirements_label" type="Label" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_2/NinePatchRect/VBoxContainer/HBoxContainer/labelsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_tlt87")
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 0
+text = "Get a High
+ Score of 500:
+
+Achive a 
+Triple Slice:"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_2/NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 17
+
+[node name="Control" type="Control" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_2/NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="check_markContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_2/NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 37
+
+[node name="completed_mark_1" type="TextureRect" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_2/NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer/check_markContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_kir0a")
+expand_mode = 3
+
+[node name="completed_mark_3" type="TextureRect" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_2/NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer/check_markContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_kir0a")
+expand_mode = 3
+
+[node name="challenge_3" type="MarginContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(265, 200)
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_3"]
+custom_minimum_size = Vector2(300, 320)
+layout_mode = 2
+texture = ExtResource("5_munmm")
+region_rect = Rect2(59, 107, 26, 26)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_3/NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.041
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.120001
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_3/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="chall_3" type="TextureButton" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_3/NinePatchRect/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_tlt87")
+disabled = true
+texture_normal = SubResource("AtlasTexture_munmm")
+texture_pressed = SubResource("AtlasTexture_bjpsp")
+texture_hover = SubResource("AtlasTexture_sdipe")
+texture_disabled = SubResource("AtlasTexture_q38o2")
+stretch_mode = 0
+script = ExtResource("4_kir0a")
+chall_amount = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_3/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="labelsContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_3/NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="requirements_label" type="Label" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_3/NinePatchRect/VBoxContainer/HBoxContainer/labelsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_tlt87")
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 0
+text = "Get a High
+Score of 700:
+
+Achive a Quadruple 
+(4x) slice:"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_3/NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 17
+
+[node name="Control" type="Control" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_3/NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="check_markContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_3/NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_constants/separation = 38
+
+[node name="completed_mark_4" type="TextureRect" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_3/NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer/check_markContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_kir0a")
+expand_mode = 3
+
+[node name="completed_mark_3" type="TextureRect" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_3/NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer/check_markContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_kir0a")
+expand_mode = 3
+
+[node name="challenge_4" type="MarginContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(250, 200)
+layout_mode = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_4"]
+custom_minimum_size = Vector2(300, 320)
+layout_mode = 2
+texture = ExtResource("5_munmm")
+region_rect = Rect2(59, 107, 26, 26)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_4/NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.041
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -0.120001
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_4/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 10
+
+[node name="chall_4" type="TextureButton" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_4/NinePatchRect/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(130, 130)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_tlt87")
+disabled = true
+texture_normal = SubResource("AtlasTexture_munmm")
+texture_pressed = SubResource("AtlasTexture_bjpsp")
+texture_hover = SubResource("AtlasTexture_sdipe")
+texture_disabled = SubResource("AtlasTexture_q38o2")
+stretch_mode = 0
+script = ExtResource("4_kir0a")
+chall_amount = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_4/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="labelsContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_4/NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 7
+
+[node name="requirements_label" type="Label" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_4/NinePatchRect/VBoxContainer/HBoxContainer/labelsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_tlt87")
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 0
+text = "Get a high 
+score of 1000:
+
+Achive a quintuple 
+(5x) slice:
+
+Achive Micro-
+Plastic Purity:"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_4/NinePatchRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 17
+
+[node name="Control" type="Control" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_4/NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="check_markContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_4/NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 38
+
+[node name="completed_mark_4" type="TextureRect" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_4/NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer/check_markContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_kir0a")
+expand_mode = 3
+
+[node name="completed_mark_3" type="TextureRect" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_4/NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer/check_markContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_kir0a")
+expand_mode = 3
+
+[node name="completed_mark_5" type="TextureRect" parent="MarginContainer/NinePatchRect/VBoxContainer/GridContainer/challenge_4/NinePatchRect/VBoxContainer/HBoxContainer/VBoxContainer/check_markContainer"]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+texture = SubResource("AtlasTexture_kir0a")
+expand_mode = 3
+
+[node name="Control" type="Control" parent="MarginContainer/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="buttonContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+
+[node name="return_button" type="Button" parent="buttonContainer"]
+layout_mode = 2
+theme = ExtResource("2_tlt87")
+text = "Return 
+To Main Menu"
+
+[node name="photo_zoom_cont" type="MarginContainer" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="photo_rect" type="NinePatchRect" parent="photo_zoom_cont"]
+layout_mode = 2
+texture = ExtResource("5_munmm")
+region_rect = Rect2(741, 38, 22, 22)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="photo_zoom_cont/photo_rect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -210.0
+offset_right = 210.0
+offset_bottom = 529.0
+grow_horizontal = 2
+theme_override_constants/separation = 40
+
+[node name="Control" type="Control" parent="photo_zoom_cont/photo_rect/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="photo_zoom_cont/photo_rect/VBoxContainer"]
+custom_minimum_size = Vector2(300, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+expand_mode = 3
+
+[node name="HSeparator" type="HSeparator" parent="photo_zoom_cont/photo_rect/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 60
+
+[node name="Label" type="Label" parent="photo_zoom_cont/photo_rect/VBoxContainer"]
+custom_minimum_size = Vector2(550, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_tlt87")
+text = "No longer do I fear swallowing Bottle caps, thank you..."
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="buttonContainer" type="MarginContainer" parent="photo_zoom_cont/photo_rect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+
+[node name="return_button" type="Button" parent="photo_zoom_cont/photo_rect/buttonContainer"]
+layout_mode = 2
+theme = ExtResource("2_tlt87")
+text = "Back"
+
+[node name="dark_screenContainer" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="dark_screenContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="menu_theme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_bjpsp")
+autoplay = true
+
+[connection signal="pressed" from="buttonContainer/return_button" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="photo_zoom_cont/photo_rect/buttonContainer/return_button" to="." method="load_animal_screen"]

@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=3 uid="uid://bw3at816h50uo"]
+
+[ext_resource type="PackedScene" uid="uid://bu4t8matwlv7q" path="res://scenes/trail.tscn" id="1_3dij3"]
+[ext_resource type="Script" uid="uid://cs3f6wr6ptux2" path="res://scripts/slicing_board.gd" id="1_en7dg"]
+[ext_resource type="Texture2D" uid="uid://cnlxk087h660o" path="res://assets/ui/Sprite sheet for Basic Pack.png" id="2_gtj07"]
+[ext_resource type="Script" uid="uid://di2453w558b1b" path="res://scripts/dead_zone.gd" id="3_ouphv"]
+[ext_resource type="PackedScene" uid="uid://hb2wo5a2iiib" path="res://scenes/in_game_ui.tscn" id="4_en7dg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_en7dg"]
+size = Vector2(2000, 40)
+
+[node name="slicing_board" type="Node2D"]
+script = ExtResource("1_en7dg")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+z_index = -15
+offset_left = -1153.0
+offset_top = -582.0
+offset_right = 1201.0
+offset_bottom = 742.0
+texture = ExtResource("2_gtj07")
+region_rect = Rect2(741, 38, 22, 22)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="trail" parent="." instance=ExtResource("1_3dij3")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="cannons" type="Node2D" parent="."]
+
+[node name="cannon1" type="Node2D" parent="cannons"]
+position = Vector2(-450, 450)
+scale = Vector2(2, 2)
+
+[node name="cannon2" type="Node2D" parent="cannons"]
+position = Vector2(-250, 350)
+scale = Vector2(2, 2)
+
+[node name="cannon3" type="Node2D" parent="cannons"]
+position = Vector2(0, 455)
+scale = Vector2(2, 2)
+
+[node name="cannon4" type="Node2D" parent="cannons"]
+position = Vector2(200, 350)
+scale = Vector2(2, 2)
+
+[node name="cannon5" type="Node2D" parent="cannons"]
+position = Vector2(450, 450)
+scale = Vector2(2, 2)
+
+[node name="cannon6" type="Node2D" parent="cannons"]
+position = Vector2(650, -150)
+rotation = 4.71239
+scale = Vector2(2, 2)
+
+[node name="cannon7" type="Node2D" parent="cannons"]
+position = Vector2(-650, -150)
+rotation = 1.5708
+scale = Vector2(2, 2)
+
+[node name="dead_zone" type="Area2D" parent="."]
+position = Vector2(0, 553)
+script = ExtResource("3_ouphv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dead_zone"]
+shape = SubResource("RectangleShape2D_en7dg")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="dead_zone"]
+position = Vector2(-980, -520)
+rotation = 1.5708
+scale = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_en7dg")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="dead_zone"]
+position = Vector2(980, -520)
+rotation = 1.5708
+scale = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_en7dg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="in_game_ui" parent="CanvasLayer" instance=ExtResource("4_en7dg")]
+
+[connection signal="area_entered" from="dead_zone" to="dead_zone" method="_on_area_entered"]

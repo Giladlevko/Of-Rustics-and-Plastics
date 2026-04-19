@@ -1,0 +1,378 @@
+[gd_scene load_steps=5 format=3 uid="uid://hb2wo5a2iiib"]
+
+[ext_resource type="Script" uid="uid://cjdxxktfj31g8" path="res://scripts/in_game_ui.gd" id="1_kplmn"]
+[ext_resource type="Theme" uid="uid://dr70u7cgdil6v" path="res://themes/ui_theme.tres" id="2_fnge6"]
+[ext_resource type="Texture2D" uid="uid://cnlxk087h660o" path="res://assets/ui/Sprite sheet for Basic Pack.png" id="3_a45jx"]
+[ext_resource type="AudioStream" uid="uid://cwexkepokrlhy" path="res://assets/music/plastic_fantastic.ogg" id="4_fqvwy"]
+
+[node name="in_game_ui" type="Control" node_paths=PackedStringArray("current_score_label", "multiplier_label", "plus_point_label", "miss_bottle_popup", "miss_amount_label", "fail_container", "fail_label", "critical_label", "restart_button", "back_to_main_button", "pause_button", "pause_to_main", "resume_button", "pause_menu", "count_label", "dark_screen", "music_track")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kplmn")
+current_score_label = NodePath("score_label_container/HBoxContainer/VBoxContainer/current_score_label")
+multiplier_label = NodePath("multiplier_label/VBoxContainer/Label")
+plus_point_label = NodePath("score_label_container/HBoxContainer/plus_point_label/VBoxContainer/plus_Label")
+miss_bottle_popup = NodePath("miss_popup")
+miss_amount_label = NodePath("miss_container/HBoxContainer/VBoxContainer/miss_label")
+fail_container = NodePath("fail_container")
+fail_label = NodePath("fail_container/NinePatchRect/MarginContainer/VBoxContainer/Label")
+critical_label = NodePath("multiplier_label/VBoxContainer/critical_label")
+restart_button = NodePath("fail_container/NinePatchRect/MarginContainer/button_container/HBoxContainer/restart_game_button")
+back_to_main_button = NodePath("fail_container/NinePatchRect/MarginContainer/button_container/HBoxContainer/return_to_main")
+pause_button = NodePath("score_label_container/HBoxContainer/VBoxContainer/pause_button")
+pause_to_main = NodePath("pause_cont/NinePatchRect/VBoxContainer/menu")
+resume_button = NodePath("pause_cont/NinePatchRect/VBoxContainer/Resume")
+pause_menu = NodePath("pause_cont")
+count_label = NodePath("countdown/count_label")
+dark_screen = NodePath("dark_screenContainer")
+music_track = NodePath("theme")
+
+[node name="score_label_container" type="MarginContainer" parent="."]
+layout_mode = 1
+offset_right = 48.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="score_label_container"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="Control" type="Control" parent="score_label_container/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="score_label_container/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Control" type="Control" parent="score_label_container/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="current_score_label" type="Label" parent="score_label_container/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_fnge6")
+theme_override_font_sizes/font_size = 24
+text = "Score: 0"
+
+[node name="pause_button" type="Button" parent="score_label_container/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_fnge6")
+text = "Pause"
+
+[node name="plus_point_label" type="Control" parent="score_label_container/HBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="score_label_container/HBoxContainer/plus_point_label"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/separation = 12
+
+[node name="Control" type="Control" parent="score_label_container/HBoxContainer/plus_point_label/VBoxContainer"]
+layout_mode = 2
+
+[node name="plus_Label" type="Label" parent="score_label_container/HBoxContainer/plus_point_label/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_fnge6")
+theme_override_font_sizes/font_size = 24
+
+[node name="multiplier_label" type="Control" parent="."]
+light_mask = 2
+visibility_layer = 2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="multiplier_label"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -92.0
+offset_right = 92.0
+offset_bottom = 120.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="HSeparator" type="HSeparator" parent="multiplier_label/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="multiplier_label/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_fnge6")
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+
+[node name="critical_label" type="Label" parent="multiplier_label/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_fnge6")
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+
+[node name="miss_container" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="miss_container"]
+layout_mode = 2
+theme_override_constants/separation = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="miss_container/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Control" type="Control" parent="miss_container/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="miss_label" type="Label" parent="miss_container/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("2_fnge6")
+theme_override_colors/font_color = Color(0.652227, 2.76752e-06, 4.33177e-07, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+uppercase = true
+
+[node name="Control" type="Control" parent="miss_container/HBoxContainer"]
+layout_mode = 2
+
+[node name="miss_popup" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="miss_label" type="Label" parent="miss_popup"]
+layout_mode = 0
+theme = ExtResource("2_fnge6")
+theme_override_colors/font_color = Color(0.652227, 2.76752e-06, 4.33177e-07, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/paragraph_spacing = 0
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 10
+theme_override_constants/shadow_outline_size = 4
+theme_override_font_sizes/font_size = 32
+text = "x"
+uppercase = true
+
+[node name="countdown" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -24.0
+offset_right = 20.0
+offset_bottom = 24.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="count_label" type="Label" parent="countdown"]
+custom_minimum_size = Vector2(40, 48)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_fnge6")
+theme_override_font_sizes/font_size = 48
+horizontal_alignment = 1
+
+[node name="pause_cont" type="MarginContainer" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="pause_cont"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 2
+texture = ExtResource("3_a45jx")
+region_rect = Rect2(741, 38, 22, 22)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="pause_cont/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/separation = 15
+
+[node name="Control" type="Control" parent="pause_cont/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="pause_cont/NinePatchRect/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_fnge6")
+theme_override_font_sizes/font_size = 24
+text = "Paused!"
+
+[node name="HSeparator" type="HSeparator" parent="pause_cont/NinePatchRect/VBoxContainer"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Resume" type="Button" parent="pause_cont/NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+theme = ExtResource("2_fnge6")
+text = "Resume"
+
+[node name="menu" type="Button" parent="pause_cont/NinePatchRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("2_fnge6")
+text = "Main Menue"
+
+[node name="fail_container" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="fail_container"]
+custom_minimum_size = Vector2(620, 300)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_fnge6")
+texture = ExtResource("3_a45jx")
+region_rect = Rect2(741, 38, 22, 22)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="fail_container/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="fail_container/NinePatchRect/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="Control" type="Control" parent="fail_container/NinePatchRect/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="fail_container/NinePatchRect/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(600, 30)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "No!! 
+Not My Precious 
+Glass Bottled Liqueur!!!"
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="button_container" type="VBoxContainer" parent="fail_container/NinePatchRect/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = 45
+
+[node name="HBoxContainer" type="HBoxContainer" parent="fail_container/NinePatchRect/MarginContainer/button_container"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 45
+
+[node name="restart_game_button" type="Button" parent="fail_container/NinePatchRect/MarginContainer/button_container/HBoxContainer"]
+custom_minimum_size = Vector2(130, 20)
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("2_fnge6")
+text = "Play Again!"
+
+[node name="return_to_main" type="Button" parent="fail_container/NinePatchRect/MarginContainer/button_container/HBoxContainer"]
+custom_minimum_size = Vector2(130, 20)
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("2_fnge6")
+text = "Main menu"
+
+[node name="Control" type="Control" parent="fail_container/NinePatchRect/MarginContainer/button_container"]
+layout_mode = 2
+
+[node name="dark_screenContainer" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="dark_screenContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="theme" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("4_fqvwy")
+autoplay = true
+
+[connection signal="pressed" from="score_label_container/HBoxContainer/VBoxContainer/pause_button" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="pause_cont/NinePatchRect/VBoxContainer/Resume" to="." method="_on_pause_button_pressed"]
+[connection signal="pressed" from="pause_cont/NinePatchRect/VBoxContainer/menu" to="." method="_on_return_to_main_pressed"]
+[connection signal="pressed" from="fail_container/NinePatchRect/MarginContainer/button_container/HBoxContainer/restart_game_button" to="." method="_on_restart_game_button_pressed"]
+[connection signal="pressed" from="fail_container/NinePatchRect/MarginContainer/button_container/HBoxContainer/return_to_main" to="." method="_on_return_to_main_pressed"]

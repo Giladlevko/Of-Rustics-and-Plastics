@@ -1,0 +1,77 @@
+[gd_scene load_steps=4 format=3 uid="uid://d0tbj3k4rpkpg"]
+
+[ext_resource type="Script" uid="uid://cs3f6wr6ptux2" path="res://scripts/slicing_board.gd" id="1_rkwk0"]
+[ext_resource type="Script" uid="uid://di2453w558b1b" path="res://scripts/dead_zone.gd" id="2_5puaf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rtlk7"]
+size = Vector2(2000, 40)
+
+[node name="SubViewportContainer" type="SubViewportContainer"]
+texture_filter = 1
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="SubViewport" type="SubViewport" parent="."]
+handle_input_locally = false
+vrs_update_mode = 2
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="background_board" type="Node2D" parent="SubViewport"]
+position = Vector2(570, 333)
+script = ExtResource("1_rkwk0")
+
+[node name="dead_zone" type="Area2D" parent="SubViewport/background_board"]
+position = Vector2(-1, 621)
+script = ExtResource("2_5puaf")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubViewport/background_board/dead_zone"]
+shape = SubResource("RectangleShape2D_rtlk7")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="SubViewport/background_board/dead_zone"]
+position = Vector2(-980, -520)
+rotation = 1.5708
+scale = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_rtlk7")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="SubViewport/background_board/dead_zone"]
+position = Vector2(980, -520)
+rotation = 1.5708
+scale = Vector2(0.5, 1)
+shape = SubResource("RectangleShape2D_rtlk7")
+
+[node name="cannons" type="Node2D" parent="SubViewport/background_board"]
+
+[node name="cannon1" type="Node2D" parent="SubViewport/background_board/cannons"]
+position = Vector2(-450, 450)
+scale = Vector2(2, 2)
+
+[node name="cannon2" type="Node2D" parent="SubViewport/background_board/cannons"]
+position = Vector2(-250, 350)
+scale = Vector2(2, 2)
+
+[node name="cannon3" type="Node2D" parent="SubViewport/background_board/cannons"]
+position = Vector2(-50, 450)
+scale = Vector2(2, 2)
+
+[node name="cannon4" type="Node2D" parent="SubViewport/background_board/cannons"]
+position = Vector2(200, 350)
+scale = Vector2(2, 2)
+
+[node name="cannon5" type="Node2D" parent="SubViewport/background_board/cannons"]
+position = Vector2(450, 450)
+scale = Vector2(2, 2)
+
+[node name="cannon6" type="Node2D" parent="SubViewport/background_board/cannons"]
+position = Vector2(650, -150)
+rotation = 4.71239
+scale = Vector2(2, 2)
+
+[node name="cannon7" type="Node2D" parent="SubViewport/background_board/cannons"]
+position = Vector2(-650, -150)
+rotation = 1.5708
+scale = Vector2(2, 2)
+
+[connection signal="area_entered" from="SubViewport/background_board/dead_zone" to="SubViewport/background_board/dead_zone" method="_on_area_entered"]

@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://bu4t8matwlv7q"]
+
+[ext_resource type="Script" uid="uid://cw8drjmbrcka1" path="res://scripts/trail.gd" id="1_rsj4o"]
+
+[sub_resource type="Curve" id="Curve_rsj4o"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0957447, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Gradient" id="Gradient_2tjbc"]
+offsets = PackedFloat32Array(0, 0.52, 1)
+colors = PackedColorArray(0.638753, 0.758185, 1, 1, 0.904919, 0.935346, 0.999999, 1, 1, 1, 1, 0)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rsj4o"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_rsj4o"]
+
+[node name="trail" type="Line2D"]
+width_curve = SubResource("Curve_rsj4o")
+gradient = SubResource("Gradient_2tjbc")
+begin_cap_mode = 2
+end_cap_mode = 2
+script = ExtResource("1_rsj4o")
+
+[node name="Area2D" type="Area2D" parent="." groups=["blade"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_rsj4o")
+
+[node name="line_colli" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("SegmentShape2D_rsj4o")
+debug_color = Color(0.92549, 0, 0, 0.654902)
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

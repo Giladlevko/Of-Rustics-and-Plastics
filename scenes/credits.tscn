@@ -1,0 +1,123 @@
+[gd_scene load_steps=5 format=3 uid="uid://bjgyrwlwfgb5n"]
+
+[ext_resource type="Theme" uid="uid://dr70u7cgdil6v" path="res://themes/ui_theme.tres" id="1_0bpdh"]
+[ext_resource type="Script" uid="uid://4gksfdqhovby" path="res://scripts/credits.gd" id="1_2ckv8"]
+[ext_resource type="Texture2D" uid="uid://cnlxk087h660o" path="res://assets/ui/Sprite sheet for Basic Pack.png" id="2_0ctdu"]
+[ext_resource type="AudioStream" uid="uid://v0rrwlekwlmu" path="res://assets/music/sad_but_hopeful.ogg" id="4_2fbfq"]
+
+[node name="credits" type="Control" node_paths=PackedStringArray("return_to_main", "dark_screen", "music_track")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2ckv8")
+return_to_main = NodePath("MarginContainer/NinePatchRect/buttonContainer/return_button")
+dark_screen = NodePath("dark_screenContainer")
+music_track = NodePath("menu_theme")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="MarginContainer"]
+layout_mode = 2
+texture = ExtResource("2_0ctdu")
+region_rect = Rect2(741, 38, 22, 22)
+patch_margin_left = 4
+patch_margin_top = 4
+patch_margin_right = 4
+patch_margin_bottom = 4
+
+[node name="titleContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+theme_override_constants/separation = 10
+
+[node name="Control" type="Control" parent="MarginContainer/NinePatchRect/titleContainer"]
+layout_mode = 2
+
+[node name="title" type="Label" parent="MarginContainer/NinePatchRect/titleContainer"]
+layout_mode = 2
+theme = ExtResource("1_0bpdh")
+theme_override_font_sizes/font_size = 48
+text = "Credits"
+
+[node name="creditsContainer" type="MarginContainer" parent="MarginContainer/NinePatchRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.131
+anchor_right = 0.982
+anchor_bottom = 0.975
+offset_left = -0.0400009
+offset_top = 0.111992
+offset_right = -0.264038
+offset_bottom = 0.200012
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 0
+
+[node name="creditsContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/creditsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Control" type="Control" parent="MarginContainer/NinePatchRect/creditsContainer/creditsContainer"]
+layout_mode = 2
+
+[node name="credits_label" type="Label" parent="MarginContainer/NinePatchRect/creditsContainer/creditsContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("1_0bpdh")
+theme_override_font_sizes/font_size = 24
+text = "Credits content"
+
+[node name="buttonContainer" type="MarginContainer" parent="MarginContainer/NinePatchRect"]
+process_mode = 3
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -40.0
+offset_bottom = 40.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+
+[node name="return_button" type="Button" parent="MarginContainer/NinePatchRect/buttonContainer"]
+layout_mode = 2
+theme = ExtResource("1_0bpdh")
+text = "Return 
+To Main Menu"
+
+[node name="dark_screenContainer" type="MarginContainer" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="dark_screenContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="menu_theme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_2fbfq")
+autoplay = true
+
+[connection signal="pressed" from="MarginContainer/NinePatchRect/buttonContainer/return_button" to="." method="_on_return_button_pressed"]
