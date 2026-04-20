@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkie617jg1veg"]
+[gd_scene load_steps=10 format=3 uid="uid://bkie617jg1veg"]
 
 [ext_resource type="Script" uid="uid://mj8lxfc2b5wy" path="res://scripts/plastic.gd" id="1_fjkm0"]
 [ext_resource type="Texture2D" uid="uid://ca8eo34he3ray" path="res://assets/plastics/bottles.png" id="2_fjkm0"]
 [ext_resource type="Script" uid="uid://qufvg3libpgo" path="res://scripts/bottle_slice.gd" id="3_cixle"]
+[ext_resource type="AudioStream" uid="uid://wtupuhebfjqm" path="res://assets/sfx/tap.wav" id="4_jfite"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cixle"]
 size = Vector2(2.25, 2)
@@ -17,6 +18,11 @@ point_count = 2
 [sub_resource type="Gradient" id="Gradient_jfite"]
 offsets = PackedFloat32Array(0, 0.46, 1)
 colors = PackedColorArray(0.677988, 0.751496, 0.935929, 1, 0.484679, 0.590221, 0.818961, 0.894118, 0.781757, 0.855452, 0.870217, 0)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qq501"]
+random_pitch = 1.25
+streams_count = 1
+stream_0/stream = ExtResource("4_jfite")
 
 [node name="Plastic" type="CharacterBody2D"]
 collision_mask = 2
@@ -245,6 +251,13 @@ color_ramp = SubResource("Gradient_jfite")
 visible = false
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="sfx" type="Node" parent="."]
+
+[node name="slash" type="AudioStreamPlayer" parent="sfx"]
+stream = SubResource("AudioStreamRandomizer_qq501")
+volume_db = -30.0
+pitch_scale = 1.5
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

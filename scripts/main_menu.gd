@@ -11,10 +11,13 @@ var buttons:Array = []
 @export var score_label:Label
 @export var music_track:AudioStreamPlayer
 @export var rules_cont:MarginContainer
-
+@export var hover_sfx:AudioStreamPlayer
+@export var pressed_sfx:AudioStreamPlayer
 signal visibility_tween_finished
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	music_track.volume_linear = db_to_linear(-100)
+	if Global.load_game_1st_time: get_tree().call_deferred("change_scene_to_file","res://scenes/living_area.tscn")
 	lighten_screen()
 	rules_cont.modulate.a = 0
 	rules_cont.visible = false
@@ -25,7 +28,6 @@ func _ready() -> void:
 	for button in buttons:
 		button.pivot_offset = button.size/2
 	
-	music_track.volume_linear = db_to_linear(-100)
 	tween_audio(db_to_linear(-15),2)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -52,6 +54,7 @@ func tween_audio(vol:float,dur:float = 5):
 	tween.tween_property(music_track,"volume_linear",vol,dur)
 
 func _on_start_game_button_pressed() -> void:
+	pressed_sfx.play()
 	tween_audio(db_to_linear(-100),0.8)
 	await darken_screen()
 	get_tree().paused = false
@@ -59,18 +62,21 @@ func _on_start_game_button_pressed() -> void:
 
 
 func _on_pic_button_pressed() -> void:
+	pressed_sfx.play()
 	tween_audio(db_to_linear(-100),0.8)
 	await darken_screen()
 	get_tree().change_scene_to_file("res://scenes/challenges_menu.tscn")
 
 
 func _on_credits_button_pressed() -> void:
+	pressed_sfx.play()
 	tween_audio(db_to_linear(-100),0.8)
 	await darken_screen()
 	get_tree().change_scene_to_file("res://scenes/credits.tscn")
 
 
 func _on_quit_button_pressed() -> void:
+	pressed_sfx.play()
 	tween_audio(db_to_linear(-100),0.8)
 	await darken_screen()
 	get_tree().quit()
@@ -86,6 +92,7 @@ func lighten_screen():
 	tween_visiblity(dark_screen,0,0.8,self)
 
 func _on_rules_button_pressed() -> void:
+	pressed_sfx.play()
 	var a_value:int
 	if rules_cont.visible:
 		a_value = 0
@@ -93,3 +100,7 @@ func _on_rules_button_pressed() -> void:
 		rules_cont.visible = true
 		a_value = 1
 	tween_visiblity(rules_cont,a_value,0.4,self)
+
+
+func on_button_hovered():
+	hover_sfx.play()

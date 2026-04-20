@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://dvd0llupqaewr"
+path="res://.godot/imported/typing2.ogg-66cd71629df1bfeb14f5b6080049fc2d.oggvorbisstr"
+
+[deps]
+
+source_file="res://addons/dialogic/Example Assets/sound-effects/typing2.ogg"
+dest_files=["res://.godot/imported/typing2.ogg-66cd71629df1bfeb14f5b6080049fc2d.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,72 @@
+[gd_scene load_steps=6 format=3 uid="uid://bkfpssii0e7nr"]
+
+[ext_resource type="Script" uid="uid://ctxicih6nledr" path="res://scripts/living_area.gd" id="1_exayb"]
+[ext_resource type="PackedScene" uid="uid://d0tbj3k4rpkpg" path="res://scenes/background_board.tscn" id="2_eec82"]
+[ext_resource type="Theme" uid="uid://dr70u7cgdil6v" path="res://themes/ui_theme.tres" id="3_eec82"]
+[ext_resource type="AudioStream" uid="uid://c0m7yqou5y85l" path="res://assets/sfx/hover-button-287656.mp3" id="4_vtd7p"]
+[ext_resource type="AudioStream" uid="uid://btplvd0chfmeb" path="res://assets/sfx/click-buttons-ui-menu-sounds-effects-button-2-203594.mp3" id="5_y157o"]
+
+[node name="living_area" type="Control" node_paths=PackedStringArray("skip_button", "dark_screen", "hover_sfx", "pressed_sfx")]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_exayb")
+skip_button = NodePath("ui/buttonContainer/return_button")
+dark_screen = NodePath("ui/dark_screenContainer")
+hover_sfx = NodePath("sfx/hover")
+pressed_sfx = NodePath("sfx/pressed")
+
+[node name="background" type="CanvasLayer" parent="."]
+layer = -5
+
+[node name="SubViewportContainer" parent="background" instance=ExtResource("2_eec82")]
+
+[node name="ui" type="CanvasLayer" parent="."]
+layer = 5
+
+[node name="buttonContainer" type="MarginContainer" parent="ui"]
+process_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -130.0
+offset_bottom = 80.0
+grow_horizontal = 0
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+
+[node name="return_button" type="Button" parent="ui/buttonContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme = ExtResource("3_eec82")
+text = "Skip"
+
+[node name="dark_screenContainer" type="MarginContainer" parent="ui"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="ui/dark_screenContainer"]
+layout_mode = 2
+color = Color(0, 0, 0, 1)
+
+[node name="sfx" type="Node" parent="."]
+
+[node name="hover" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource("4_vtd7p")
+volume_db = -25.0
+
+[node name="pressed" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource("5_y157o")
+volume_db = 5.0
+
+[connection signal="mouse_entered" from="ui/buttonContainer/return_button" to="." method="on_button_hovered"]
+[connection signal="pressed" from="ui/buttonContainer/return_button" to="." method="_on_return_button_pressed"]

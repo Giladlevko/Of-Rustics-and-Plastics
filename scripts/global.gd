@@ -12,3 +12,5 @@ var high_score:int
 var unlocked_pics:Array
 var best_slice_mult:int
 var total_points:int
+var load_game_1st_time:bool = true
+var seeing_completed_challenges_1st_time = true

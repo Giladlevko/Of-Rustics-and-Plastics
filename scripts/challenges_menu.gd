@@ -23,7 +23,7 @@ func _ready() -> void:
 	buttons = [return_to_main,close_pics]
 	chall_buttons = [chall_1,chall_2,chall_3,chall_4]
 	music_track.volume_linear = db_to_linear(-100)
-	tween_audio(db_to_linear(-15),2)
+	
 	
 	challenges = {
 	"chall_1": [Global.high_score >= 300],
@@ -38,10 +38,15 @@ func _ready() -> void:
 			if challenges[button.name][challenge] == true:
 				unlock_challenge(button,challenge)
 				
+				
 		
 		if Global.unlocked_pics.has(button.name):
 			button.disabled = false
-
+	if Global.unlocked_pics.size() >= 4 and Global.seeing_completed_challenges_1st_time:
+		Global.load_game_1st_time = false
+		get_tree().call_deferred("change_scene_to_file","res://scenes/living_area.tscn")
+	
+	tween_audio(db_to_linear(-15),2)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -53,6 +58,7 @@ func _process(delta: float) -> void:
 
 
 func _on_return_button_pressed() -> void:
+	pressed_sfx.play()
 	tween_audio(db_to_linear(-100),0.8)
 	await darken_screen()
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")
@@ -72,6 +78,7 @@ func get_animal_data(button_name:String) -> Array:
 	return data[button_name]
 
 func load_animal_screen(button_name:String = ""):
+	pressed_sfx.play()
 	var a_value:int
 	if photo_zoom_cont.visible:
 		a_value = 0
@@ -84,5 +91,5 @@ func load_animal_screen(button_name:String = ""):
 	if !animal_data.is_empty():
 		animal_rect.texture = animal_data[0]
 		animal_label.text = animal_data[1]
-	tween_visiblity(photo_zoom_cont,a_value,0.8,self)
+	tween_visiblity(photo_zoom_cont,a_value,0.3,self)
 	pass

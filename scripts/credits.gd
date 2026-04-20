@@ -18,6 +18,7 @@ func _process(delta: float) -> void:
 			tween_scale(button,1,0.2,self)
 
 func _on_return_button_pressed() -> void:
+	pressed_sfx.play()
 	tween_audio(db_to_linear(-100),0.8)
 	await darken_screen()
 	get_tree().change_scene_to_file("res://scenes/main_menu.tscn")

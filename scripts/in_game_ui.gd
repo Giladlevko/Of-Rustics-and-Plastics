@@ -14,6 +14,7 @@ extends UI
 @export var resume_button:Button
 @export var pause_menu:MarginContainer
 @export var count_label:Label
+var in_countdown:bool
 signal countdown_finished
 var point_pending:bool
 var missed_tex_pending:bool
@@ -95,7 +96,7 @@ func on_multiplier():
 
 signal missed_bottle_finished
 func handle_missed_bottle(x_pos):
-	var offset:int = int(miss_bottle_popup.size.x/3)
+	var offset:int = int(miss_bottle_popup.size.x)
 	if missed_tex_pending:
 		await missed_bottle_finished
 	
@@ -145,6 +146,7 @@ func update_stats():
 	Global.total_points += Global.current_score
 
 func _on_restart_game_button_pressed() -> void:
+	pressed_sfx.play()
 	update_stats()
 	tween_audio(db_to_linear(-100),0.8)
 	darken_screen()
@@ -154,6 +156,7 @@ func _on_restart_game_button_pressed() -> void:
 
 
 func _on_return_to_main_pressed() -> void:
+	pressed_sfx.play()
 	update_stats()
 	tween_audio(db_to_linear(-100),0.8)
 	darken_screen()
@@ -162,20 +165,23 @@ func _on_return_to_main_pressed() -> void:
 
 
 func _on_pause_button_pressed() -> void:
-	if pause_menu.visible:
-		tween_visiblity(pause_menu,0,0.3,self)
-		await visibility_tween_finished
-		countdown()
-		await countdown_finished
-		get_tree().paused = false
-	else:
-		update_stats()
-		pause_menu.visible = true
-		tween_visiblity(pause_menu,1,0.3,self)
-		get_tree().paused = true
+	pressed_sfx.play()
+	if !in_countdown:
+		if pause_menu.visible:
+			tween_visiblity(pause_menu,0,0.3,self)
+			await visibility_tween_finished
+			countdown()
+			await countdown_finished
+			get_tree().paused = false
+		else:
+			update_stats()
+			pause_menu.visible = true
+			tween_visiblity(pause_menu,1,0.3,self)
+			get_tree().paused = true
 
 
 func countdown(sec:int = 3):
+	in_countdown = true
 	count_label.pivot_offset = count_label.size / 2
 	for i in range(1,sec+1):
 		var tween = get_tree().create_tween().bind_node(self)
@@ -186,4 +192,5 @@ func countdown(sec:int = 3):
 		await tween.finished
 		tween.kill()
 	count_label.text = ""
+	in_countdown = false
 	countdown_finished.emit()

@@ -13,6 +13,7 @@ var is_sliced:bool
 @onready var slant_right: Node2D = $sprites/half_sprites/slant_right
 @onready var slant_left: Node2D = $sprites/half_sprites/slant_left
 @onready var particles: CPUParticles2D = $particles
+@onready var slash_sfx: AudioStreamPlayer = $sfx/slash
 
 @onready var liqueur_full: Sprite2D = $sprites/liqueur_full
 
@@ -77,9 +78,11 @@ func _on_area_2d_area_exited(area: Area2D) -> void:
 func handle_crit():
 	if crit:
 		SignalBus.hit_crit.emit()
+		slash_sfx.volume_db = -20
 
 func handle_slice():
 	handle_crit()
+	slash_sfx.play()
 	velocity = Vector2.ZERO
 	is_sliced = true
 	tween.kill()

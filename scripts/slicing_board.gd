@@ -4,6 +4,8 @@ var PLASTIC:PackedScene = preload("res://scenes/plastic.tscn")
 var can_spawn:bool = false
 var plastic_id:Array = ["grape","cherry","pear","apple","grape","cherry","pear","apple","liqueur"]
 var cannon_array:Array
+@export var max_bottles:int = 4
+@export var cooldown:float = 2
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	cannon_array = cannons.get_children()
@@ -22,7 +24,7 @@ func _process(delta: float) -> void:
 
 func handle_cannons():
 	if can_spawn:
-		for amount in randi_range(1,4):
+		for amount in randi_range(1,max_bottles):
 			var cannon = cannon_array.pick_random()
 			cannon_array.erase(cannon)
 			var plastic = PLASTIC.instantiate()
@@ -33,5 +35,5 @@ func handle_cannons():
 	cannon_array.clear()
 	cannon_array = cannons.get_children()
 	can_spawn = false
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(cooldown).timeout
 	can_spawn = true

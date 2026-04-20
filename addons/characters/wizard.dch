@@ -1,0 +1,43 @@
+{
+"@path": "res://addons/dialogic/Resources/character.gd",
+"@subpath": NodePath(""),
+&"_translation_id": "",
+&"color": Color(1, 1, 1, 1),
+&"custom_info": {
+"prefix": "",
+"sound_mood_default": "Mood 1",
+"sound_moods": {
+"Mood 1": {
+"mode": 0,
+"name": "Mood 1",
+"pitch_base": 1.0,
+"pitch_variance": 0.0,
+"skip_characters": 0.0,
+"sound_path": "res://addons/dialogic/Example Assets/sound-effects/typing2.ogg",
+"volume_base": -10.0,
+"volume_variance": 0.0
+}
+},
+"style": "new_style",
+"suffix": ""
+},
+&"default_portrait": "New portrait",
+&"description": "",
+&"display_name": "Wizard:",
+&"mirror": false,
+&"nicknames": [""],
+&"offset": Vector2(0, 0),
+&"portraits": {
+"New portrait": {
+"export_overrides": {
+"image": "\"res://addons/characters/wizard_portrait.png\""
+},
+"mirror": false,
+"offset": Vector2(0, 0),
+"scale": 1,
+"scene": "",
+"sound_mood": "Mood 1"
+}
+},
+&"scale": 1.0
+}

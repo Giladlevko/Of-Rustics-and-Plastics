@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://hb2wo5a2iiib"]
+[gd_scene load_steps=7 format=3 uid="uid://hb2wo5a2iiib"]
 
 [ext_resource type="Script" uid="uid://cjdxxktfj31g8" path="res://scripts/in_game_ui.gd" id="1_kplmn"]
 [ext_resource type="Theme" uid="uid://dr70u7cgdil6v" path="res://themes/ui_theme.tres" id="2_fnge6"]
 [ext_resource type="Texture2D" uid="uid://cnlxk087h660o" path="res://assets/ui/Sprite sheet for Basic Pack.png" id="3_a45jx"]
 [ext_resource type="AudioStream" uid="uid://cwexkepokrlhy" path="res://assets/music/plastic_fantastic.ogg" id="4_fqvwy"]
+[ext_resource type="AudioStream" uid="uid://c0m7yqou5y85l" path="res://assets/sfx/hover-button-287656.mp3" id="5_6qwj3"]
+[ext_resource type="AudioStream" uid="uid://btplvd0chfmeb" path="res://assets/sfx/click-buttons-ui-menu-sounds-effects-button-2-203594.mp3" id="6_276nr"]
 
-[node name="in_game_ui" type="Control" node_paths=PackedStringArray("current_score_label", "multiplier_label", "plus_point_label", "miss_bottle_popup", "miss_amount_label", "fail_container", "fail_label", "critical_label", "restart_button", "back_to_main_button", "pause_button", "pause_to_main", "resume_button", "pause_menu", "count_label", "dark_screen", "music_track")]
+[node name="in_game_ui" type="Control" node_paths=PackedStringArray("current_score_label", "multiplier_label", "plus_point_label", "miss_bottle_popup", "miss_amount_label", "fail_container", "fail_label", "critical_label", "restart_button", "back_to_main_button", "pause_button", "pause_to_main", "resume_button", "pause_menu", "count_label", "dark_screen", "music_track", "hover_sfx", "pressed_sfx")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -31,6 +33,8 @@ pause_menu = NodePath("pause_cont")
 count_label = NodePath("countdown/count_label")
 dark_screen = NodePath("dark_screenContainer")
 music_track = NodePath("theme")
+hover_sfx = NodePath("sfx/hover")
+pressed_sfx = NodePath("sfx/pressed")
 
 [node name="score_label_container" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -143,7 +147,7 @@ layout_mode = 2
 [node name="miss_label" type="Label" parent="miss_container/HBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("2_fnge6")
-theme_override_colors/font_color = Color(0.652227, 2.76752e-06, 4.33177e-07, 1)
+theme_override_colors/font_color = Color(0.835294, 0, 0, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/paragraph_spacing = 0
@@ -171,7 +175,7 @@ grow_vertical = 0
 [node name="miss_label" type="Label" parent="miss_popup"]
 layout_mode = 0
 theme = ExtResource("2_fnge6")
-theme_override_colors/font_color = Color(0.652227, 2.76752e-06, 4.33177e-07, 1)
+theme_override_colors/font_color = Color(0.835718, 6.95489e-06, 9.62615e-07, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/paragraph_spacing = 0
@@ -369,10 +373,26 @@ color = Color(0, 0, 0, 1)
 [node name="theme" type="AudioStreamPlayer" parent="."]
 process_mode = 3
 stream = ExtResource("4_fqvwy")
+volume_db = -80.0
 autoplay = true
 
+[node name="sfx" type="Node" parent="."]
+
+[node name="hover" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource("5_6qwj3")
+volume_db = -25.0
+
+[node name="pressed" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource("6_276nr")
+volume_db = 5.0
+
+[connection signal="mouse_entered" from="score_label_container/HBoxContainer/VBoxContainer/pause_button" to="." method="on_button_hovered"]
 [connection signal="pressed" from="score_label_container/HBoxContainer/VBoxContainer/pause_button" to="." method="_on_pause_button_pressed"]
+[connection signal="mouse_entered" from="pause_cont/NinePatchRect/VBoxContainer/Resume" to="." method="on_button_hovered"]
 [connection signal="pressed" from="pause_cont/NinePatchRect/VBoxContainer/Resume" to="." method="_on_pause_button_pressed"]
+[connection signal="mouse_entered" from="pause_cont/NinePatchRect/VBoxContainer/menu" to="." method="on_button_hovered"]
 [connection signal="pressed" from="pause_cont/NinePatchRect/VBoxContainer/menu" to="." method="_on_return_to_main_pressed"]
+[connection signal="mouse_entered" from="fail_container/NinePatchRect/MarginContainer/button_container/HBoxContainer/restart_game_button" to="." method="on_button_hovered"]
 [connection signal="pressed" from="fail_container/NinePatchRect/MarginContainer/button_container/HBoxContainer/restart_game_button" to="." method="_on_restart_game_button_pressed"]
+[connection signal="mouse_entered" from="fail_container/NinePatchRect/MarginContainer/button_container/HBoxContainer/return_to_main" to="." method="on_button_hovered"]
 [connection signal="pressed" from="fail_container/NinePatchRect/MarginContainer/button_container/HBoxContainer/return_to_main" to="." method="_on_return_to_main_pressed"]

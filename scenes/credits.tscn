@@ -1,11 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://bjgyrwlwfgb5n"]
+[gd_scene load_steps=7 format=3 uid="uid://bjgyrwlwfgb5n"]
 
 [ext_resource type="Theme" uid="uid://dr70u7cgdil6v" path="res://themes/ui_theme.tres" id="1_0bpdh"]
 [ext_resource type="Script" uid="uid://4gksfdqhovby" path="res://scripts/credits.gd" id="1_2ckv8"]
 [ext_resource type="Texture2D" uid="uid://cnlxk087h660o" path="res://assets/ui/Sprite sheet for Basic Pack.png" id="2_0ctdu"]
 [ext_resource type="AudioStream" uid="uid://v0rrwlekwlmu" path="res://assets/music/sad_but_hopeful.ogg" id="4_2fbfq"]
+[ext_resource type="AudioStream" uid="uid://c0m7yqou5y85l" path="res://assets/sfx/hover-button-287656.mp3" id="5_mah5v"]
+[ext_resource type="AudioStream" uid="uid://btplvd0chfmeb" path="res://assets/sfx/click-buttons-ui-menu-sounds-effects-button-2-203594.mp3" id="6_kyhnv"]
 
-[node name="credits" type="Control" node_paths=PackedStringArray("return_to_main", "dark_screen", "music_track")]
+[node name="credits" type="Control" node_paths=PackedStringArray("return_to_main", "dark_screen", "music_track", "hover_sfx", "pressed_sfx")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -17,6 +19,8 @@ script = ExtResource("1_2ckv8")
 return_to_main = NodePath("MarginContainer/NinePatchRect/buttonContainer/return_button")
 dark_screen = NodePath("dark_screenContainer")
 music_track = NodePath("menu_theme")
+hover_sfx = NodePath("sfx/hover")
+pressed_sfx = NodePath("sfx/pressed")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -72,17 +76,33 @@ size_flags_vertical = 0
 
 [node name="creditsContainer" type="VBoxContainer" parent="MarginContainer/NinePatchRect/creditsContainer"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 20
 
 [node name="Control" type="Control" parent="MarginContainer/NinePatchRect/creditsContainer/creditsContainer"]
 layout_mode = 2
 
-[node name="credits_label" type="Label" parent="MarginContainer/NinePatchRect/creditsContainer/creditsContainer"]
+[node name="credits_label" type="RichTextLabel" parent="MarginContainer/NinePatchRect/creditsContainer/creditsContainer"]
+clip_contents = false
+custom_minimum_size = Vector2(1100, 550)
 layout_mode = 2
 size_flags_horizontal = 0
 theme = ExtResource("1_0bpdh")
-theme_override_font_sizes/font_size = 24
-text = "Credits content"
+text = "Programmer / Musician:
+Gilad Levkowitz
+
+If you want you can contact me at MrLadsgames@gmail.com
+
+Art:
+UI: Sprout Lands By : Cup Nooble
+Bottles: Pop Shop Packs
+Wizard: KingBell
+
+SFX:
+Brackeys, Pixabay: freesound_community
+
+Dialog System: Made with Dialogic!
+
+Made In the Godot Engine!"
 
 [node name="buttonContainer" type="MarginContainer" parent="MarginContainer/NinePatchRect"]
 process_mode = 3
@@ -118,6 +138,18 @@ color = Color(0, 0, 0, 1)
 
 [node name="menu_theme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_2fbfq")
+volume_db = -80.0
 autoplay = true
 
+[node name="sfx" type="Node" parent="."]
+
+[node name="hover" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource("5_mah5v")
+volume_db = -25.0
+
+[node name="pressed" type="AudioStreamPlayer" parent="sfx"]
+stream = ExtResource("6_kyhnv")
+volume_db = 5.0
+
+[connection signal="mouse_entered" from="MarginContainer/NinePatchRect/buttonContainer/return_button" to="." method="on_button_hovered"]
 [connection signal="pressed" from="MarginContainer/NinePatchRect/buttonContainer/return_button" to="." method="_on_return_button_pressed"]

@@ -1,0 +1,77 @@
+[gd_resource type="Resource" script_class="DialogicStyle" load_steps=19 format=3 uid="uid://v3km3k8hp0h8"]
+
+[ext_resource type="PackedScene" uid="uid://cqpb3ie51rwl5" path="res://addons/dialogic/Modules/DefaultLayoutParts/Base_Default/default_layout_base.tscn" id="1_gll43"]
+[ext_resource type="Script" uid="uid://djh6x1rxai3q8" path="res://addons/dialogic/Resources/dialogic_style_layer.gd" id="2_7enhk"]
+[ext_resource type="PackedScene" uid="uid://c1k5m0w3r40xf" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_FullBackground/full_background_layer.tscn" id="3_n0ono"]
+[ext_resource type="PackedScene" uid="uid://cn674foxwedqu" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_Input/full_advance_input_layer.tscn" id="4_rdomf"]
+[ext_resource type="PackedScene" uid="uid://by6waso0mjpjp" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_SpeakerPortraitTextbox/textbox_with_speaker_portrait.tscn" id="5_adnry"]
+[ext_resource type="PackedScene" uid="uid://dsbwnp5hegnu3" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_Glossary/glossary_popup_layer.tscn" id="6_r7ey1"]
+[ext_resource type="PackedScene" uid="uid://btgi02ipotg1s" path="res://addons/styles/CenteredChoices/custom_centered_choices.tscn" id="7_tmkjm"]
+[ext_resource type="PackedScene" uid="uid://cvgf4c6gg0tsy" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_TextInput/text_input_layer.tscn" id="8_keppn"]
+[ext_resource type="PackedScene" uid="uid://lx24i8fl6uo" path="res://addons/dialogic/Modules/DefaultLayoutParts/Layer_History/history_layer.tscn" id="9_ggjvi"]
+[ext_resource type="Script" uid="uid://cdaefueeyvts8" path="res://addons/dialogic/Resources/dialogic_style.gd" id="10_bbmxh"]
+
+[sub_resource type="Resource" id="Resource_0m6ru"]
+script = ExtResource("2_7enhk")
+scene = ExtResource("1_gll43")
+overrides = {
+"global_bg_color": "Color(0.745098, 0.603922, 0.447059, 1)",
+"global_font": "\"res://assets/fonts/PixelOperator8.ttf\""
+}
+
+[sub_resource type="Resource" id="Resource_lrl6m"]
+script = ExtResource("2_7enhk")
+scene = ExtResource("3_n0ono")
+overrides = {}
+
+[sub_resource type="Resource" id="Resource_wrsfa"]
+script = ExtResource("2_7enhk")
+scene = ExtResource("4_rdomf")
+overrides = {}
+
+[sub_resource type="Resource" id="Resource_dqrlt"]
+script = ExtResource("2_7enhk")
+scene = ExtResource("5_adnry")
+overrides = {}
+
+[sub_resource type="Resource" id="Resource_oggaf"]
+script = ExtResource("2_7enhk")
+scene = ExtResource("6_r7ey1")
+overrides = {}
+
+[sub_resource type="Resource" id="Resource_wvj5n"]
+script = ExtResource("2_7enhk")
+scene = ExtResource("7_tmkjm")
+overrides = {
+"text_color_custom": "Color(0.745098, 0.603922, 0.447059, 1)",
+"text_color_hovered": "Color(0.647059, 0.494118, 0.321569, 1)",
+"text_color_pressed": "Color(0.647059, 0.494118, 0.321569, 1)"
+}
+
+[sub_resource type="Resource" id="Resource_hgfw1"]
+script = ExtResource("2_7enhk")
+scene = ExtResource("8_keppn")
+overrides = {}
+
+[sub_resource type="Resource" id="Resource_66adc"]
+script = ExtResource("2_7enhk")
+scene = ExtResource("9_ggjvi")
+overrides = {}
+
+[resource]
+script = ExtResource("10_bbmxh")
+name = "styles"
+layer_list = Array[String](["10", "11", "12", "13", "14", "15", "16"])
+layer_info = {
+"": SubResource("Resource_0m6ru"),
+"10": SubResource("Resource_lrl6m"),
+"11": SubResource("Resource_wrsfa"),
+"12": SubResource("Resource_dqrlt"),
+"13": SubResource("Resource_oggaf"),
+"14": SubResource("Resource_wvj5n"),
+"15": SubResource("Resource_hgfw1"),
+"16": SubResource("Resource_66adc")
+}
+base_overrides = {}
+layers = Array[ExtResource("2_7enhk")]([])
+metadata/_latest_layer = "12"
