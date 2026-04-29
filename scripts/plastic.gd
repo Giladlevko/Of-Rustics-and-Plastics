@@ -118,8 +118,8 @@ func positive_mod(a:int,b:int) -> int:
 
 func pick_slice_type() -> Node2D:
 	$Label.rotation_degrees = -global_rotation_degrees
-	$Label.text = str(snapped(positive_mod((round(Global.slash_angle) + round(global_rotation_degrees)),360),45))
-	var relative_slash_angle:int = snapped(positive_mod((round(Global.slash_angle)+round(global_rotation_degrees)),360),45)
+	$Label.text = str(snapped(positive_mod((round(Global.slash_angle) + positive_mod(round(global_rotation_degrees),360)),360),45))
+	var relative_slash_angle:int = snapped(positive_mod((round(Global.slash_angle)+positive_mod(round(global_rotation_degrees),360)),360),45)
 	print("relative_slash_angle:",relative_slash_angle,"slash_angle:",
 	int(Global.slash_angle),"rotation:",int(global_rotation_degrees))
 	match relative_slash_angle:

@@ -13,9 +13,14 @@ var buttons:Array = []
 @export var rules_cont:MarginContainer
 @export var hover_sfx:AudioStreamPlayer
 @export var pressed_sfx:AudioStreamPlayer
+@export var open_reset_menu:Button
+@export var reset_cont:MarginContainer
+@export var close_reset_menu:Button
+@export var reset_game:Button
 signal visibility_tween_finished
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	SaveLoad._save()
 	music_track.volume_linear = db_to_linear(-100)
 	if Global.load_game_1st_time: get_tree().call_deferred("change_scene_to_file","res://scenes/living_area.tscn")
 	lighten_screen()
@@ -24,7 +29,8 @@ func _ready() -> void:
 	if Global.high_score > 0:
 		score_label.text = "High Score: "+str(Global.high_score)
 	else:score_label.visible = false
-	buttons = [start_button,rules_button,pic_button,credits_button,quit_button,rules_back]
+	buttons = [start_button,rules_button,pic_button,credits_button,quit_button,
+	rules_back,open_reset_menu,reset_game,close_reset_menu]
 	for button in buttons:
 		button.pivot_offset = button.size/2
 	
@@ -99,8 +105,27 @@ func _on_rules_button_pressed() -> void:
 	else: 
 		rules_cont.visible = true
 		a_value = 1
-	tween_visiblity(rules_cont,a_value,0.4,self)
+	tween_visiblity(rules_cont,a_value,0.3,self)
 
 
 func on_button_hovered():
 	hover_sfx.play()
+
+
+func _on_reset_button_pressed() -> void:
+	pressed_sfx.play()
+	var a_value:int
+	if reset_cont.visible:
+		a_value = 0
+	else: 
+		reset_cont.visible = true
+		a_value = 1
+	tween_visiblity(reset_cont,a_value,0.3,self)
+
+
+func _on_confirm_reset_pressed() -> void:
+	pressed_sfx.play()
+	SaveLoad.reset()
+	darken_screen()
+	await visibility_tween_finished
+	get_tree().reload_current_scene()

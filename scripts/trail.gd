@@ -9,34 +9,46 @@ var mouse_speed:float
 @onready var line_colli: CollisionShape2D = $Area2D/line_colli
 
 var last_mouse_point:Vector2 = Vector2.ZERO
+var offseted_last_mouse_point:Vector2 = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	
 	pass # Replace with function body.
-
-
+const SLASH_ANGLE_CALC_OFFSET: int = 15
+var frame_index:int
+var delta_x:float
+var delta_y:float
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	frame_index+=1
 	#TODO 
 	#use these two points to get the movement angle
 	#  to know how to cut the bottles
 	var mouse_pos = get_global_mouse_position()
-	var delta_x = (last_mouse_point.x - (blade_area.global_position.x-mouse_pos.x))
-	var delta_y = (last_mouse_point.y - (blade_area.global_position.y-mouse_pos.y))
+
+	
+	delta_x = (offseted_last_mouse_point.x - (blade_area.global_position.x-mouse_pos.x))
+	delta_y = (offseted_last_mouse_point.y - (blade_area.global_position.y-mouse_pos.y))
+	
 	var slash_slope:float
+	
 	if delta_x != 0:
 		slash_slope = delta_y/delta_x
-		Global.slash_angle = round(rad_to_deg(atan2(-delta_y,delta_x)))
+		Global.slash_angle = int(rad_to_deg(atan2(-delta_y,delta_x)))%360
+		
 	else:
 		pass
 		Global.slash_angle = 0
 	if snapped(Global.slash_angle,45)%360 >0:
-		$Label.text = str(snapped(Global.slash_angle,45)%360)
+		$Label.text = str(snapped(Global.slash_angle,45))
 	
 	
 	line_colli.shape.b = last_mouse_point
 	last_mouse_point = blade_area.global_position - mouse_pos
+	if frame_index == SLASH_ANGLE_CALC_OFFSET:
+		offseted_last_mouse_point = blade_area.global_position - mouse_pos
+		frame_index = 0
 	
 	if Input.is_action_pressed("LEFT_MOUSE") or Input.is_action_pressed("S"):
 		#print(Global.slash_angle)
